@@ -1,0 +1,24 @@
+#!/bin/bash
+
+EMIND_ENV=$1;
+
+if [ -z "$EMIND_ENV" ]; then
+  EMIND_ENV="development";
+fi
+
+echo "Starting in $EMIND_ENV";
+
+case "$EMIND_ENV" in
+  "development" )
+    export ROOT_URL='http://localhost:3000'
+    #export MONGO_URL="mongodb://127.0.0.1/my-app"
+    meteor --settings config/config.json
+    ;;
+  "staging" )
+    export ROOT_URL="http://localhost:3000"
+    meteor --settings config/config.json
+    ;;
+  "production" )
+    echo "prod mode";
+    ;;
+esac
